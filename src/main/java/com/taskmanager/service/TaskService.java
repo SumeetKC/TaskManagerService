@@ -32,12 +32,13 @@ public class TaskService {
 	@PutMapping("/add")
 	public @ResponseBody void addOrUpdateTask(@RequestBody Task task, @RequestBody ParentTask parentTask){
 	
-		
+		taskDao.addOrUpdateTask(task);
 	}
 	
 	@GetMapping("/view")
 	public @ResponseBody List<Task> viewTask(){
-		ArrayList<Task> taskList = new ArrayList<Task>();
+		List<Task> taskList = new ArrayList<Task>();
+		taskList = taskDao.viewTask();
 		return taskList;
 	}
 
