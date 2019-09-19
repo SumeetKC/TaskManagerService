@@ -1,0 +1,135 @@
+
+choice=0;
+print("\tCar Yard");
+print("1. Buy");
+print("2. Sell");
+print("3. Search");
+print("4. Show all");
+print("5. Quit");
+print("Your option[1-5] : ");
+choice=int(input())
+
+yard = Caryard()
+
+if choice > 0 and choice <= 5:
+    if choice == 1:
+        yard.buy_car()
+    elif choice == 2:
+        yard.sell_car()
+    elif choice == 3:
+        yard.search_car()
+    elif choice == 4:
+        yard.list_all_cars()
+    elif choice == 5:
+        print("Terminating...")
+        exit
+
+else:
+    print("Invalid Option! Must be between 1 and 5")
+
+
+
+
+#############Caryard
+class caryard:
+    
+    def __init__(self):
+        
+    car = Cars()
+    
+    def buy_car():
+        print("Buy Car")
+        print("-----------------------------")
+        print("Enter rego : ")
+        rego=input()
+        print("Enter model : ")
+        model=input()
+        print("Enter color : ")
+        color=input()
+        print("Enter price : ")
+        price=int(input())
+        
+    
+    car.addCar(rego,model,color,price)
+    
+    print("-----------------------------")
+    print("Car Added: "+model)
+    
+    
+    def sell_car():
+        print("Sell Car")
+        print("-----------------------------")
+        print("Enter car rego : ")
+        rego=input()
+        vehicle=car.search(rego)
+        
+        print("Car Model: "+vehicle.model)
+        print("Car Color: "+vehicle.color)
+        print("Car Purchase Price: $"+vehicle.price)
+        print("Car Sell Price: $"+vehicle.price)
+        
+        
+        
+        
+    def search_car():
+        print("Search Car")
+        print("-----------------------------")
+        print("Enter car rego : ")
+        rego=input()
+        vehicle=car.search(rego)
+        
+        print("Car Model: "+vehicle.model)
+        print("Car Color: "+vehicle.color)
+        print("Car Purchase Price: $"+vehicle.price)        
+    
+    def list_all_cars():
+        vehiclelist = car.all_cars()
+        print("Cars in Yard")
+        print("-----------------------------")
+        print("Cars in yard (Total :"vehiclelist.len)
+        
+		
+		
+		
+		
+		
+############Cars
+class Cars:
+    
+    carlist = []
+    
+    def addCar(rego,model,color,price):
+        vehicle = Vehicle(rego,model,color,price)
+        for x in carlist:
+            if(x.rego == rego)
+                return "Duplicate rego. Enter new Value"
+                
+        carlist.append(vehicle)
+        print(carlist)
+        
+    def removeCar(rego):
+        for x in carlist:
+            if(x.rego == rego)
+            carlist.remove(x)
+        
+        
+    def all_cars():
+        return carlist
+        
+        
+    def search(rego):
+        for x in carlist:
+            if(x.rego == rego)
+            return x
+        		
+		
+#########Vehicle
+
+class Vehicle:
+    
+    def __init__(self,rego,model,color,price):
+        self.rego = rego
+        self.model = model
+        self.color = color
+        self.price = price
+        
