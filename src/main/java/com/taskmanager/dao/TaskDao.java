@@ -17,7 +17,7 @@ import com.taskmanager.model.Task;
 @Repository
 public interface TaskDao {
 	
-	public void addOrUpdateTask(Task task);
+	public int addTask(Task task);
 	
 	public int addOrUpdateParent(ParentTask parentTask);
 	

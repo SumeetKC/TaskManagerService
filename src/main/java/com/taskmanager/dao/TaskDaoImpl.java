@@ -24,10 +24,22 @@ public class TaskDaoImpl implements TaskDao {
 	}
 	
 	@Override
-	public void addOrUpdateTask(Task task) {
+	public int addTask(Task task) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
-		session.saveOrUpdate(task);
+		ParentTask parentTask = new ParentTask();
+		String parentName = task.getParent_task();
+		//Setting parent task from task object
+		parentTask.setParentTask(parentName);
+		//Saving parent task into table
+		int parentId = (int) session.save(parentTask);
+		
+		//Setting parent id in task object
+		task.setParent_id(parentId);
+		
+		int task_id = (int) session.save(task);
+		session.close();
+		return task_id;
 		
 	}
 

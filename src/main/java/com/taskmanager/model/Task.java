@@ -24,13 +24,14 @@ public class Task {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int task_id;
 	private int parent_id;
+	private String parent_task;
 	@Column(name = "task")
 	private String taskName;
 	@Column(name = "start_date")
 	private Date startDate;
 	@Column(name = "end_date")
 	private Date endDate;
-	private String priority;
+	private int priority;
 	private String endTaskStatus;
 
 	
@@ -117,7 +118,7 @@ public class Task {
 	/**
 	 * @return the priority
 	 */
-	public String getPriority() {
+	public int getPriority() {
 		return priority;
 	}
 
@@ -125,7 +126,7 @@ public class Task {
 	/**
 	 * @param priority the priority to set
 	 */
-	public void setPriority(String priority) {
+	public void setPriority(int priority) {
 		this.priority = priority;
 	}
 
@@ -145,21 +146,37 @@ public class Task {
 		this.endTaskStatus = endTaskStatus;
 	}
 
-	
+	/**
+	 * @return the parent_task
+	 */
+	public String getParent_task() {
+		return parent_task;
+	}
+
+	/**
+	 * @param parent_task the parent_task to set
+	 */
+	public void setParent_task(String parent_task) {
+		this.parent_task = parent_task;
+	}
+
+
 	/**
 	 * @param task_id
 	 * @param parent_id
+	 * @param parent_task
 	 * @param taskName
 	 * @param startDate
 	 * @param endDate
 	 * @param priority
 	 * @param endTaskStatus
 	 */
-	public Task(int task_id, int parent_id, String taskName, Date startDate, Date endDate, String priority,
-			String endTaskStatus) {
+	public Task(int task_id, int parent_id, String parent_task, String taskName, Date startDate, Date endDate,
+			int priority, String endTaskStatus) {
 		super();
 		this.task_id = task_id;
 		this.parent_id = parent_id;
+		this.parent_task = parent_task;
 		this.taskName = taskName;
 		this.startDate = startDate;
 		this.endDate = endDate;
