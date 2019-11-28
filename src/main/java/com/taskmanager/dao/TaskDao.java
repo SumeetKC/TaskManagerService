@@ -4,7 +4,7 @@
 package com.taskmanager.dao;
 
 import java.util.List;
-import com.taskmanager.model.ParentTask;
+
 import com.taskmanager.model.Task;
 
 /**
@@ -16,8 +16,8 @@ public interface TaskDao {
 	
 	public int addTask(Task task);
 	
-	public int addOrUpdateParent(ParentTask parentTask);
+	public int updateTask(Task task);
 	
-	public List<Task> viewTask();
+	public List<Task> getTasks();
 
 }
