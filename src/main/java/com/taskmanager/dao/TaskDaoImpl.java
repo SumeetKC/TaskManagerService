@@ -5,10 +5,12 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.taskmanager.model.ParentTask;
 import com.taskmanager.model.Task;
 
+@Repository
 public class TaskDaoImpl implements TaskDao {
 	
 	@Autowired

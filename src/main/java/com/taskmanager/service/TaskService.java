@@ -7,18 +7,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.taskmanager.dao.TaskDao;
+import com.taskmanager.dao.TaskDaoImpl;
 import com.taskmanager.model.Task;
 
 /**
@@ -26,16 +22,17 @@ import com.taskmanager.model.Task;
  *
  */
 
-//@CrossOrigin(origins = "http://locahost:4200")
+@CrossOrigin(origins = "http://locahost:4200")
 @RestController
 @RequestMapping("/api")
 public class TaskService {
 	
 	@Autowired
-	private TaskDao taskDao;
+	private TaskDaoImpl taskDaoImpl;
 	
-	@PostMapping("/addtask")
-	public int addTask(@Valid @RequestBody Task task) {
+	@RequestMapping("/addtask")
+	public int addTask() {
+		System.out.println("Inside Method");
 		Task task1 = new Task();
 		task1.setTaskName("New Task");
 		task1.setPriority(1);
@@ -43,7 +40,7 @@ public class TaskService {
 		task1.setStartDate(new Date());
 		task1.setEndDate(new Date());
 		
-        return taskDao.addTask(task);
+        return taskDaoImpl.addTask(task1);
     }
 	
 	
@@ -66,7 +63,7 @@ public class TaskService {
 	@GetMapping("/tasks")
 	public @ResponseBody List<Task> viewTask(){
 		List<Task> taskList = new ArrayList<Task>();
-		taskList = taskDao.viewTask();
+		taskList = taskDaoImpl.viewTask();
 		return taskList;
 	}
 

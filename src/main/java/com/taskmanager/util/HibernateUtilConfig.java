@@ -4,7 +4,6 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,14 +29,14 @@ public class HibernateUtilConfig {
 	@Value("${spring.jpa.database-platform}")
 	private String dialect;
 
-	@Bean
+	
 	public DataSource getDataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource(url, username, password);
 		dataSource.setDriverClassName(driverClass);
 		return dataSource;
 	}
 
-	@Bean
+	@Bean("sessionFactory")
 	public LocalSessionFactoryBean sessionFactory()
 	{
 		LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
@@ -56,11 +55,13 @@ public class HibernateUtilConfig {
 	}
 	
 	@Bean
-	@Autowired
 	public HibernateTransactionManager hibernateTransactionManager()
 	{
 		HibernateTransactionManager hibernateTransactionManager = new HibernateTransactionManager();
 		hibernateTransactionManager.setSessionFactory(sessionFactory().getObject());
 		return hibernateTransactionManager;
 	}
+	
+	
+	
 }
