@@ -14,10 +14,12 @@ import com.taskmanager.model.Task;
 
 public interface TaskDao {
 	
-	public int addTask(Task task);
+	public Task addTask(Task task);
 	
-	public int updateTask(Task task);
+	public Task updateTask(Task task);
 	
 	public List<Task> getTasks();
+	
+	public Task updateEndTask(Task task);
 
 }

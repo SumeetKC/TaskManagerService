@@ -1,8 +1,12 @@
 package com.taskmanager.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -15,21 +19,30 @@ import com.taskmanager.model.Task;
 @Repository
 public class TaskDaoImpl implements TaskDao {
 
+	/** Initialize the LOGGER object */
+	private static final Log logger = LogFactory.getLog(TaskDaoImpl.class);
+	
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	@Override
-	public int addTask(Task task) {
+	public Task addTask(Task task) {
 		// TODO Auto-generated method stub
+		logger.info("Method Started - addTask()");
+		/*
+		 * Task task1 = new Task(); task1.setTaskName("New Task"); task1.setPriority(1);
+		 * task1.setParentTask("Parent5"); task1.setStartDate(new Date());
+		 * task1.setEndDate(new Date());
+		 */
+		
 		Session session = sessionFactory.openSession();
 		Transaction tx = null;
 		int parentId;
-		int taskId;
 		String parentName;
 		try {
 			tx = session.beginTransaction();
 			ParentTask parentTask = new ParentTask();
-			parentName = task.getParent_task();
+			parentName = task.getParentTask();
 			if (parentName != null) {
 				// Setting parent task from task object
 				parentTask.setParentTask(parentName);
@@ -37,10 +50,10 @@ public class TaskDaoImpl implements TaskDao {
 				parentId = (int) session.save(parentTask);
 
 				// Setting parent id in task object
-				task.setParent_id(parentId);
+				task.setParentId(parentId);
 
 			}
-			taskId = (int) session.save(task);
+			session.save(task);
 			tx.commit();
 
 		} catch (Exception ex) {
@@ -51,14 +64,15 @@ public class TaskDaoImpl implements TaskDao {
 		} finally {
 			session.close();
 		}
-
-		return taskId;
+		logger.info("Method Ended - addTask()");
+		return task;
 
 	}
 
 	@Override
-	public int updateTask(Task task) {
+	public Task updateTask(Task task) {
 		// TODO Auto-generated method stub
+		logger.info("Method Started - updateTask()");
 		Session session = sessionFactory.openSession();
 		Transaction tx = null;
 		int parentId;
@@ -66,7 +80,7 @@ public class TaskDaoImpl implements TaskDao {
 		try {
 			tx = session.beginTransaction();
 			ParentTask parentTask = new ParentTask();
-			String parentName = task.getParent_task();
+			String parentName = task.getParentTask();
 			if (parentName != null) {
 				// Setting parent task from task object
 				parentTask.setParentTask(parentName);
@@ -90,14 +104,15 @@ public class TaskDaoImpl implements TaskDao {
 		} finally {
 			session.close();
 		}
-
-		return taskId;
+		logger.info("Method Ended - updateTask()");
+		return task;
 
 	}
 
 	@Override
 	public List<Task> getTasks() {
 		// TODO Auto-generated method stub
+		logger.info("Method Started - getTasks()");
 		Session session = sessionFactory.openSession();
 		Transaction tx = null;
 		List<Task> taskList = new ArrayList<Task>();
@@ -114,8 +129,31 @@ public class TaskDaoImpl implements TaskDao {
 		} finally {
 			session.close();
 		}
-
+		logger.info("Method Ended - getTasks()");
 		return taskList;
+	}
+
+	@Override
+	public Task updateEndTask(Task task) {
+		// TODO Auto-generated method stub
+		logger.info("Method Started - updateEndTask()");
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			session.saveOrUpdate("endTaskStatus", task);
+			tx.commit();
+
+		} catch (Exception ex) {
+			if (tx != null)
+				tx.rollback();
+
+			throw ex;
+		} finally {
+			session.close();
+		}
+		logger.info("Method Ended - getTasks()");
+		return null;
 	}
 
 }

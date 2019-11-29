@@ -4,6 +4,8 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +19,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 public class HibernateUtilConfig {
+	
+	/** Initialize the LOGGER object */
+	private static final Log logger = LogFactory.getLog(HibernateUtilConfig.class);
 
 	@Value("${spring.datasource.driver-class-name}")
 	private String driverClass;
@@ -33,6 +38,7 @@ public class HibernateUtilConfig {
 	public DataSource getDataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource(url, username, password);
 		dataSource.setDriverClassName(driverClass);
+		logger.info("Data Source created.");
 		return dataSource;
 	}
 
@@ -43,6 +49,7 @@ public class HibernateUtilConfig {
 		sessionFactoryBean.setDataSource(getDataSource());
 		sessionFactoryBean.setHibernateProperties(hibernateProperties());
 		sessionFactoryBean.setPackagesToScan(new String[] {"com.taskmanager.model"});
+		logger.info("Session factory created.");
 		return sessionFactoryBean;
 	}
 	
