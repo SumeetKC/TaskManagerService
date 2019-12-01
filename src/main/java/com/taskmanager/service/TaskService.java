@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.taskmanager.dao.TaskDaoImpl;
@@ -27,7 +28,12 @@ import com.taskmanager.model.Task;
  *
  */
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(
+	    allowCredentials = "true",
+	    origins = "*", 
+	    allowedHeaders = "*", 
+	    methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE,RequestMethod.PUT}
+	)
 @RestController
 @RequestMapping("/v1")
 public class TaskService {
