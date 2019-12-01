@@ -12,8 +12,8 @@
 	<artifactId>TaskManager</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>TaskManager</name>
-	<description>Task Manager is an application for afull stack case study</description>
-
+	<description>Task Manager is an application for a full stack case study</description>
+	<packaging>war</packaging>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
