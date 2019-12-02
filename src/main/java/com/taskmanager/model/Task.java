@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * @author SumeetK
  *
@@ -26,19 +28,28 @@ public class Task {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "task_id")
 	private int taskId;
+	
 	@Column(name = "parent_id")
 	private int parentId;
+	
 	@Column(name = "parent_task")
 	private String parentTask;
+	
 	@Column(name = "task")
 	private String taskName;
+	
 	@Column(name = "start_date")
 	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date startDate;
+	
 	@Column(name = "end_date")
 	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date endDate;
+	
 	private int priority;
+	
 	private boolean endTaskStatus;
 	/**
 	 * @return the taskId

@@ -30,7 +30,7 @@ import com.taskmanager.model.Task;
 
 @CrossOrigin(
 	    allowCredentials = "true",
-	    origins = "*", 
+	    origins = "http://localhost:4200", 
 	    allowedHeaders = "*", 
 	    methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE,RequestMethod.PUT}
 	)

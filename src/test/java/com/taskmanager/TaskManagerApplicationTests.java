@@ -1,6 +1,6 @@
 package com.taskmanager;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 import java.text.ParseException;
@@ -9,13 +9,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -23,7 +21,6 @@ import com.taskmanager.dao.TaskDao;
 import com.taskmanager.model.Task;
 import com.taskmanager.service.TaskService;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class TaskManagerApplicationTests {
 
